@@ -1,45 +1,44 @@
 "use strict";
 exports.__esModule = true;
+exports.expectObject = exports.expectArray = exports.expectBasic = void 0;
 var resultMatcher_1 = require("./resultMatcher");
-function expectArray(description, receive) {
+function expectBasic(receive, failedTests) {
     return function (expect) {
-        var output = {
-            description: description,
+        var passed = resultMatcher_1["default"].areValuesEqual(receive, expect);
+        if (passed)
+            return;
+        var failedTest = {
             receive: String(receive),
-            expect: String(expect),
-            passed: resultMatcher_1["default"].matchArrays(receive, expect)
+            expect: String(expect)
         };
-        printOutput(output);
+        failedTests.push(failedTest);
     };
 }
-function expectBasic(description, receive) {
+exports.expectBasic = expectBasic;
+function expectArray(receive, failedTests) {
     return function (expect) {
-        var output = {
-            description: description,
-            receive: String(receive),
-            expect: String(expect),
-            passed: resultMatcher_1["default"].matchBasicTypes(receive, expect)
-        };
-        printOutput(output);
-    };
-}
-function expectObject(description, receive) {
-    return function (expect) {
-        var output = {
-            description: description,
+        var passed = resultMatcher_1["default"].areArraysEqual(receive, expect);
+        if (passed)
+            return;
+        var failedTest = {
             receive: JSON.stringify(receive),
-            expect: JSON.stringify(expect),
-            passed: resultMatcher_1["default"].matchObjects(receive, expect)
+            expect: JSON.stringify(expect)
         };
-        printOutput(output);
+        failedTests.push(failedTest);
     };
 }
-function printOutput(result) {
-    if (!result.passed) {
-        var header = "\n====\nTesting: \"".concat(result.description, "\" failed when:");
-        var expectedOutput = "\nExpect: ".concat(result.expect);
-        var receiveOutput = "\nReceive: ".concat(result.receive, "\n====");
-        console.log("\u001B[31m".concat(header + expectedOutput + receiveOutput, "\u001B[0m "));
-    }
+exports.expectArray = expectArray;
+function expectObject(receive, failedTests) {
+    return function (expect) {
+        var passed = resultMatcher_1["default"].areObjectsEqual(receive, expect);
+        if (passed)
+            return;
+        var failedTest = {
+            receive: JSON.stringify(receive),
+            expect: JSON.stringify(expect)
+        };
+        failedTests.push(failedTest);
+    };
 }
+exports.expectObject = expectObject;
 exports["default"] = { expectBasic: expectBasic, expectArray: expectArray, expectObject: expectObject };

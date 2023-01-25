@@ -1,63 +1,69 @@
-import matchers from './resultMatcher';
+import matchers from "./resultMatcher";
 
 import {
   ArrayInput,
   BasicInput,
   ExpectAnalyzer,
-  ObjectInput
-} from '../types/types';
-import { TestOutput } from '../interfaces/interfaces';
+  ObjectInput,
+} from "../types/types";
+import { FailedTest } from "../interfaces/interfaces";
 
-function expectArray(description: string, receive: ArrayInput): ExpectAnalyzer {
-  return (expect: ArrayInput) => {
-    const output: TestOutput = {
-      description,
+// TODO: If the receive and expect value are from different types
+// The test should faile...
+
+function expectBasic(
+  receive: BasicInput,
+  failedTests: FailedTest[]
+): ExpectAnalyzer {
+  return (expect: BasicInput) => {
+    const passed: boolean = matchers.areValuesEqual(receive, expect);
+
+    if (passed) return;
+
+    const failedTest: FailedTest = {
       receive: String(receive),
       expect: String(expect),
-      passed: matchers.matchArrays(receive, expect)
     };
 
-    printOutput(output);
+    failedTests.push(failedTest);
   };
 }
 
-function expectBasic(description: string, receive: BasicInput): ExpectAnalyzer {
-  return (expect: BasicInput) => {
-    const output: TestOutput = {
-      description,
-      receive: String(receive),
-      expect: String(expect),
-      passed: matchers.matchBasicTypes(receive, expect)
+function expectArray(
+  receive: ArrayInput,
+  failedTests: FailedTest[]
+): ExpectAnalyzer {
+  return (expect: ArrayInput) => {
+    const passed: boolean = matchers.areArraysEqual(receive, expect);
+
+    if (passed) return;
+
+    const failedTest: FailedTest = {
+      receive: JSON.stringify(receive),
+      expect: JSON.stringify(expect),
     };
 
-    printOutput(output);
+    failedTests.push(failedTest);
   };
 }
 
 function expectObject(
-  description: string,
-  receive: ObjectInput
+  receive: ObjectInput,
+  failedTests: FailedTest[]
 ): ExpectAnalyzer {
   return (expect: ObjectInput) => {
-    const output: TestOutput = {
-      description,
+    const passed: boolean = matchers.areObjectsEqual(receive, expect);
+
+    if (passed) return;
+
+    const failedTest: FailedTest = {
       receive: JSON.stringify(receive),
       expect: JSON.stringify(expect),
-      passed: matchers.matchObjects(receive, expect)
     };
 
-    printOutput(output);
+    failedTests.push(failedTest);
   };
 }
 
-function printOutput(result: TestOutput): void {
-  if (!result.passed) {
-    const header: string = `\n====\nTesting: "${result.description}" failed when:`;
-    const expectedOutput: string = `\nExpect: ${result.expect}`;
-    const receiveOutput: string = `\nReceive: ${result.receive}\n====`;
-
-    console.log(`\x1b[31m${header + expectedOutput + receiveOutput}\x1b[0m `);
-  }
-}
-
+export { expectBasic, expectArray, expectObject };
 export default { expectBasic, expectArray, expectObject };
