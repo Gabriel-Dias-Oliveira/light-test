@@ -1,6 +1,7 @@
 import expects from "./expect";
 import output from "./output";
-import { TestData, FailedTest } from "../interfaces/interfaces";
+import listener from "./functionListener";
+import { TestData, FailedTest, Listener } from "../interfaces/interfaces";
 import { BasicInput, ExpectAnalyzer, ObjectInput } from "../types/types";
 
 let testDescription: string;
@@ -56,5 +57,9 @@ function receive(receiveValue: any): TestData {
   };
 }
 
-export { testing, receive };
+function createListener(moduleToListen: ObjectInput, key: string): Listener {
+  return listener.createListener(moduleToListen, key);
+}
+
+export { testing, receive, createListener };
 export default { testing, receive };

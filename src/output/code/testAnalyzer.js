@@ -1,8 +1,9 @@
 "use strict";
 exports.__esModule = true;
-exports.receive = exports.testing = void 0;
+exports.createListener = exports.receive = exports.testing = void 0;
 var expect_1 = require("./expect");
 var output_1 = require("./output");
+var functionListener_1 = require("./functionListener");
 var testDescription;
 var failedTests;
 function testing(description, runBlockOfTest) {
@@ -40,4 +41,8 @@ function receive(receiveValue) {
     };
 }
 exports.receive = receive;
+function createListener(moduleToListen, key) {
+    return functionListener_1["default"].createListener(moduleToListen, key);
+}
+exports.createListener = createListener;
 exports["default"] = { testing: testing, receive: receive };

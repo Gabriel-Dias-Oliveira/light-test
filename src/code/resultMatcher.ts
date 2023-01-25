@@ -1,14 +1,18 @@
 import { BasicInput, ArrayInput, ObjectInput } from "../types/types";
 
-function areValuesEqual(recieve: BasicInput, expect: BasicInput): boolean {
-  return recieve === expect;
+function areValuesEqual(recieve: BasicInput, expected: BasicInput): boolean {
+  const isFromCorrecType: boolean = typeof expected !== "object";
+
+  return isFromCorrecType && recieve === expected;
 }
 
-function areArraysEqual(receive: ArrayInput, expect: ArrayInput): boolean {
-  if (receive.length !== expect.length) return false;
+function areArraysEqual(receive: ArrayInput, expected: ArrayInput): boolean {
+  if (!Array.isArray(expected)) return false;
+
+  if (receive.length !== expected.length) return false;
 
   const areEqual: boolean = receive.every((receiveElement, index) => {
-    const expectElement: any = expect[index];
+    const expectElement: any = expected[index];
 
     return matchElements(receiveElement, expectElement);
   });
@@ -16,18 +20,20 @@ function areArraysEqual(receive: ArrayInput, expect: ArrayInput): boolean {
   return areEqual;
 }
 
-function areObjectsEqual(receive: ObjectInput, expect: ObjectInput): boolean {
-  const isFalsyObject: boolean = !receive && !expect;
+function areObjectsEqual(receive: ObjectInput, expected: ObjectInput): boolean {
+  if (typeof expected !== "object") return false;
 
-  if (isFalsyObject) return receive === expect;
+  const isFalsyObject: boolean = !receive && !expected;
+
+  if (isFalsyObject) return receive === expected;
 
   const receiveKeys: string[] = Object.keys(receive);
-  const expectedKeys: string[] = Object.keys(expect);
+  const expectedKeys: string[] = Object.keys(expected);
 
   if (receiveKeys.length !== expectedKeys.length) return false;
 
   const areEqual: boolean = receiveKeys.every((key) => {
-    const expectElement: any = expect[key];
+    const expectElement: any = expected[key];
     const receiveElement: any = receive[key];
 
     return matchElements(receiveElement, expectElement);

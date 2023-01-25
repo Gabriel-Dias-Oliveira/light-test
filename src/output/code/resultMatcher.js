@@ -1,30 +1,35 @@
 "use strict";
 exports.__esModule = true;
 exports.areObjectsEqual = exports.areArraysEqual = exports.areValuesEqual = void 0;
-function areValuesEqual(recieve, expect) {
-    return recieve === expect;
+function areValuesEqual(recieve, expected) {
+    var isFromCorrecType = typeof expected !== "object";
+    return isFromCorrecType && recieve === expected;
 }
 exports.areValuesEqual = areValuesEqual;
-function areArraysEqual(receive, expect) {
-    if (receive.length !== expect.length)
+function areArraysEqual(receive, expected) {
+    if (!Array.isArray(expected))
+        return false;
+    if (receive.length !== expected.length)
         return false;
     var areEqual = receive.every(function (receiveElement, index) {
-        var expectElement = expect[index];
+        var expectElement = expected[index];
         return matchElements(receiveElement, expectElement);
     });
     return areEqual;
 }
 exports.areArraysEqual = areArraysEqual;
-function areObjectsEqual(receive, expect) {
-    var isFalsyObject = !receive && !expect;
+function areObjectsEqual(receive, expected) {
+    if (typeof expected !== "object")
+        return false;
+    var isFalsyObject = !receive && !expected;
     if (isFalsyObject)
-        return receive === expect;
+        return receive === expected;
     var receiveKeys = Object.keys(receive);
-    var expectedKeys = Object.keys(expect);
+    var expectedKeys = Object.keys(expected);
     if (receiveKeys.length !== expectedKeys.length)
         return false;
     var areEqual = receiveKeys.every(function (key) {
-        var expectElement = expect[key];
+        var expectElement = expected[key];
         var receiveElement = receive[key];
         return matchElements(receiveElement, expectElement);
     });

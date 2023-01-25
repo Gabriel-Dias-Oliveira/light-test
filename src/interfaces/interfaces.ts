@@ -9,3 +9,13 @@ export interface FailedTest {
   expect: string;
   receive: string;
 }
+
+export interface Listener {
+  mockImplementation: Function;
+  status: ListenerStatus;
+}
+
+export interface ListenerStatus {
+  called: Boolean;
+  callTimes: number;
+}

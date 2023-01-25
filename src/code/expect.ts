@@ -8,9 +8,6 @@ import {
 } from "../types/types";
 import { FailedTest } from "../interfaces/interfaces";
 
-// TODO: If the receive and expect value are from different types
-// The test should faile...
-
 function expectBasic(
   receive: BasicInput,
   failedTests: FailedTest[]
@@ -20,10 +17,7 @@ function expectBasic(
 
     if (passed) return;
 
-    const failedTest: FailedTest = {
-      receive: String(receive),
-      expect: String(expect),
-    };
+    const failedTest: FailedTest = getFailedTestPayload(expect, receive);
 
     failedTests.push(failedTest);
   };
@@ -38,10 +32,7 @@ function expectArray(
 
     if (passed) return;
 
-    const failedTest: FailedTest = {
-      receive: JSON.stringify(receive),
-      expect: JSON.stringify(expect),
-    };
+    const failedTest: FailedTest = getFailedTestPayload(expect, receive);
 
     failedTests.push(failedTest);
   };
@@ -56,12 +47,16 @@ function expectObject(
 
     if (passed) return;
 
-    const failedTest: FailedTest = {
-      receive: JSON.stringify(receive),
-      expect: JSON.stringify(expect),
-    };
+    const failedTest: FailedTest = getFailedTestPayload(expect, receive);
 
     failedTests.push(failedTest);
+  };
+}
+
+function getFailedTestPayload(expect: any, receive: any): FailedTest {
+  return {
+    expect: JSON.stringify(expect),
+    receive: JSON.stringify(receive),
   };
 }
 

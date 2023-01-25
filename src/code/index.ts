@@ -1,4 +1,15 @@
-import { testing, receive } from "./testAnalyzer";
+import { testing, receive, createListener } from "./testAnalyzer";
+import test from "./test";
+
+const a = createListener(test, "test");
+
+test.test();
+
+a.mockImplementation(() => console.log("Mocked!"));
+
+test.test();
+
+console.log(a.status.callTimes);
 
 testing("When using numbers", () => {
   const x = 1;
@@ -58,6 +69,10 @@ testing("Falsy values failing", () => {
   receive("").expect(null);
 });
 
-testing("Falsy values failing", () => {
+testing("From different types", () => {
   receive({}).expect(2);
+  receive({}).expect([]);
+  receive([]).expect({});
+  receive(2).expect([]);
+  receive(2).expect({});
 });

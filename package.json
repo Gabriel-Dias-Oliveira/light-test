@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint . --ext .ts",
-    "code": "tsc src/code/*.ts --outDir src/output && node src/output/code/index.js"
+    "code": "clear && tsc src/code/*.ts --outDir src/output && node src/output/code/index.js"
   },
   "keywords": [],
   "author": "",

@@ -7,10 +7,7 @@ function expectBasic(receive, failedTests) {
         var passed = resultMatcher_1["default"].areValuesEqual(receive, expect);
         if (passed)
             return;
-        var failedTest = {
-            receive: String(receive),
-            expect: String(expect)
-        };
+        var failedTest = getFailedTestPayload(expect, receive);
         failedTests.push(failedTest);
     };
 }
@@ -20,10 +17,7 @@ function expectArray(receive, failedTests) {
         var passed = resultMatcher_1["default"].areArraysEqual(receive, expect);
         if (passed)
             return;
-        var failedTest = {
-            receive: JSON.stringify(receive),
-            expect: JSON.stringify(expect)
-        };
+        var failedTest = getFailedTestPayload(expect, receive);
         failedTests.push(failedTest);
     };
 }
@@ -33,12 +27,15 @@ function expectObject(receive, failedTests) {
         var passed = resultMatcher_1["default"].areObjectsEqual(receive, expect);
         if (passed)
             return;
-        var failedTest = {
-            receive: JSON.stringify(receive),
-            expect: JSON.stringify(expect)
-        };
+        var failedTest = getFailedTestPayload(expect, receive);
         failedTests.push(failedTest);
     };
 }
 exports.expectObject = expectObject;
+function getFailedTestPayload(expect, receive) {
+    return {
+        expect: JSON.stringify(expect),
+        receive: JSON.stringify(receive)
+    };
+}
 exports["default"] = { expectBasic: expectBasic, expectArray: expectArray, expectObject: expectObject };

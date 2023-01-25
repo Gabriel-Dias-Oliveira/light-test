@@ -1,6 +1,12 @@
 "use strict";
 exports.__esModule = true;
 var testAnalyzer_1 = require("./testAnalyzer");
+var test_1 = require("./test");
+var a = (0, testAnalyzer_1.createListener)(test_1["default"], "test");
+test_1["default"].test();
+a.changeImplementation(function () { return console.log("Mocked!"); });
+test_1["default"].test();
+console.log(a.status.callTimes);
 (0, testAnalyzer_1.testing)("When using numbers", function () {
     var x = 1;
     (0, testAnalyzer_1.receive)(x).expect(1);
@@ -47,6 +53,10 @@ var testAnalyzer_1 = require("./testAnalyzer");
     (0, testAnalyzer_1.receive)(undefined).expect(null);
     (0, testAnalyzer_1.receive)("").expect(null);
 });
-(0, testAnalyzer_1.testing)("Falsy values failing", function () {
+(0, testAnalyzer_1.testing)("From different types", function () {
     (0, testAnalyzer_1.receive)({}).expect(2);
+    (0, testAnalyzer_1.receive)({}).expect([]);
+    (0, testAnalyzer_1.receive)([]).expect({});
+    (0, testAnalyzer_1.receive)(2).expect([]);
+    (0, testAnalyzer_1.receive)(2).expect({});
 });
