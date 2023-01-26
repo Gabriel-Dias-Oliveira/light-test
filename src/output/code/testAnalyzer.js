@@ -4,13 +4,11 @@ exports.createListener = exports.receive = exports.testing = void 0;
 var expect_1 = require("./expect");
 var output_1 = require("./output");
 var functionListener_1 = require("./functionListener");
-var testDescription;
 var failedTests;
 function testing(description, runBlockOfTest) {
-    testDescription = description;
     failedTests = [];
     runBlockOfTest();
-    output_1["default"].printResult(testDescription, failedTests);
+    output_1["default"].printResult(description, failedTests);
 }
 exports.testing = testing;
 function receive(receiveValue) {
@@ -22,7 +20,8 @@ function receive(receiveValue) {
         result: receiveValue,
         expect: expect,
         expectTruthy: expect_1["default"].expectTruthy(receiveValue, failedTests),
-        expectFalsy: expect_1["default"].expectFalsy(receiveValue, failedTests)
+        expectFalsy: expect_1["default"].expectFalsy(receiveValue, failedTests),
+        expectError: expect_1["default"].expectError(receiveValue, failedTests)
     };
 }
 exports.receive = receive;

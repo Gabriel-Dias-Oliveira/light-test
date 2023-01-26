@@ -38,6 +38,20 @@ function isTruthy(receive: any): boolean {
   return !isFalsy(receive);
 }
 
+function throwError(receive: Function): boolean {
+  if (typeof receive !== "function") return false;
+
+  let hasError: boolean = false;
+
+  try {
+    receive();
+  } catch {
+    hasError = true;
+  } finally {
+    return hasError;
+  }
+}
+
 function matchElements(receive: any, expected: any): boolean {
   const isObject: boolean =
     typeof expected === "object" && typeof receive === "object";
@@ -47,5 +61,11 @@ function matchElements(receive: any, expected: any): boolean {
   return areValuesEqual(receive, expected);
 }
 
-export { areValuesEqual, areObjectsEqual, isTruthy, isFalsy };
-export default { areValuesEqual, areObjectsEqual, isTruthy, isFalsy };
+export { areValuesEqual, areObjectsEqual, isTruthy, isFalsy, throwError };
+export default {
+  areValuesEqual,
+  areObjectsEqual,
+  isTruthy,
+  isFalsy,
+  throwError,
+};

@@ -59,6 +59,21 @@ function expectTruthy(receive: any, failedTests: FailedTest[]): ExpectAnalyzer {
   };
 }
 
+function expectError(
+  receive: Function,
+  failedTests: FailedTest[]
+): ExpectAnalyzer {
+  return () => {
+    const passed: boolean = matchers.throwError(receive);
+
+    if (passed) return;
+
+    const failedTest: FailedTest = getFailedTestPayload("An error", receive);
+
+    failedTests.push(failedTest);
+  };
+}
+
 function getFailedTestPayload(expect: any, receive: any): FailedTest {
   return {
     expect: JSON.stringify(expect),
@@ -66,5 +81,11 @@ function getFailedTestPayload(expect: any, receive: any): FailedTest {
   };
 }
 
-export { expectBasic, expectObject, expectTruthy, expectFalsy };
-export default { expectBasic, expectObject, expectTruthy, expectFalsy };
+export { expectBasic, expectObject, expectTruthy, expectFalsy, expectError };
+export default {
+  expectBasic,
+  expectObject,
+  expectTruthy,
+  expectFalsy,
+  expectError,
+};

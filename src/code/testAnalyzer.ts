@@ -4,15 +4,13 @@ import listener from "./functionListener";
 import { TestData, FailedTest, Listener } from "../interfaces/interfaces";
 import { ExpectAnalyzer, ObjectInput } from "../types/types";
 
-let testDescription: string;
 let failedTests: FailedTest[];
 
 function testing(description: string, runBlockOfTest: () => void): void {
-  testDescription = description;
   failedTests = [];
 
   runBlockOfTest();
-  output.printResult(testDescription, failedTests);
+  output.printResult(description, failedTests);
 }
 
 function receive(receiveValue: any): TestData {
@@ -26,6 +24,7 @@ function receive(receiveValue: any): TestData {
     expect,
     expectTruthy: expects.expectTruthy(receiveValue, failedTests),
     expectFalsy: expects.expectFalsy(receiveValue, failedTests),
+    expectError: expects.expectError(receiveValue, failedTests),
   };
 }
 

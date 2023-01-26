@@ -5,6 +5,7 @@ export interface TestData {
   expect: (value: TestValues) => void;
   expectTruthy: () => void;
   expectFalsy: () => void;
+  expectError: () => void;
 }
 
 export interface FailedTest {

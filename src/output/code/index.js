@@ -64,3 +64,6 @@ var testAnalyzer_1 = require("./testAnalyzer");
     (0, testAnalyzer_1.receive)("").expectFalsy();
     (0, testAnalyzer_1.receive)(null).expectFalsy();
 });
+(0, testAnalyzer_1.testing)("Error", function () {
+    (0, testAnalyzer_1.receive)(null).expectError();
+});

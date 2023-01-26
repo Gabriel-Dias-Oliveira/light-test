@@ -77,3 +77,7 @@ testing("Falsy", () => {
   receive("").expectFalsy();
   receive(null).expectFalsy();
 });
+
+testing("Error", () => {
+  receive(null).expectError();
+});

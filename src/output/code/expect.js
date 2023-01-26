@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.expectFalsy = exports.expectTruthy = exports.expectObject = exports.expectBasic = void 0;
+exports.expectError = exports.expectFalsy = exports.expectTruthy = exports.expectObject = exports.expectBasic = void 0;
 var resultMatcher_1 = require("./resultMatcher");
 function expectBasic(receive, failedTests) {
     return function (expect) {
@@ -42,10 +42,34 @@ function expectTruthy(receive, failedTests) {
     };
 }
 exports.expectTruthy = expectTruthy;
+function expectError(receive, failedTests) {
+    return function () {
+        var passed = false;
+        try {
+            receive();
+        }
+        catch (_a) {
+            passed = true && typeof receive === "function";
+        }
+        finally {
+            if (passed)
+                return;
+            var failedTest = getFailedTestPayload("An error", receive);
+            failedTests.push(failedTest);
+        }
+    };
+}
+exports.expectError = expectError;
 function getFailedTestPayload(expect, receive) {
     return {
         expect: JSON.stringify(expect),
         receive: JSON.stringify(receive)
     };
 }
-exports["default"] = { expectBasic: expectBasic, expectObject: expectObject, expectTruthy: expectTruthy, expectFalsy: expectFalsy };
+exports["default"] = {
+    expectBasic: expectBasic,
+    expectObject: expectObject,
+    expectTruthy: expectTruthy,
+    expectFalsy: expectFalsy,
+    expectError: expectError
+};
