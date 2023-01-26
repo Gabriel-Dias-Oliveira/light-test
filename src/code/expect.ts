@@ -1,11 +1,6 @@
 import matchers from "./resultMatcher";
 
-import {
-  ArrayInput,
-  BasicInput,
-  ExpectAnalyzer,
-  ObjectInput,
-} from "../types/types";
+import { BasicInput, ExpectAnalyzer, ObjectInput } from "../types/types";
 import { FailedTest } from "../interfaces/interfaces";
 
 function expectBasic(
@@ -14,21 +9,6 @@ function expectBasic(
 ): ExpectAnalyzer {
   return (expect: BasicInput) => {
     const passed: boolean = matchers.areValuesEqual(receive, expect);
-
-    if (passed) return;
-
-    const failedTest: FailedTest = getFailedTestPayload(expect, receive);
-
-    failedTests.push(failedTest);
-  };
-}
-
-function expectArray(
-  receive: ArrayInput,
-  failedTests: FailedTest[]
-): ExpectAnalyzer {
-  return (expect: ArrayInput) => {
-    const passed: boolean = matchers.areArraysEqual(receive, expect);
 
     if (passed) return;
 
@@ -60,5 +40,5 @@ function getFailedTestPayload(expect: any, receive: any): FailedTest {
   };
 }
 
-export { expectBasic, expectArray, expectObject };
-export default { expectBasic, expectArray, expectObject };
+export { expectBasic, expectObject };
+export default { expectBasic, expectObject };

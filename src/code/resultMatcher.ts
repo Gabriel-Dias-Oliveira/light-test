@@ -1,23 +1,9 @@
-import { BasicInput, ArrayInput, ObjectInput } from "../types/types";
+import { BasicInput, ObjectInput } from "../types/types";
 
 function areValuesEqual(recieve: BasicInput, expected: BasicInput): boolean {
   const isFromCorrecType: boolean = typeof expected !== "object";
 
   return isFromCorrecType && recieve === expected;
-}
-
-function areArraysEqual(receive: ArrayInput, expected: ArrayInput): boolean {
-  if (!Array.isArray(expected)) return false;
-
-  if (receive.length !== expected.length) return false;
-
-  const areEqual: boolean = receive.every((receiveElement, index) => {
-    const expectElement: any = expected[index];
-
-    return matchElements(receiveElement, expectElement);
-  });
-
-  return areEqual;
 }
 
 function areObjectsEqual(receive: ObjectInput, expected: ObjectInput): boolean {
@@ -43,10 +29,6 @@ function areObjectsEqual(receive: ObjectInput, expected: ObjectInput): boolean {
 }
 
 function matchElements(receive: any, expected: any): boolean {
-  const isArray: boolean = Array.isArray(expected) && Array.isArray(receive);
-
-  if (isArray) return areArraysEqual(expected, receive);
-
   const isObject: boolean =
     typeof expected === "object" && typeof receive === "object";
 
@@ -55,5 +37,5 @@ function matchElements(receive: any, expected: any): boolean {
   return areValuesEqual(receive, expected);
 }
 
-export { areValuesEqual, areArraysEqual, areObjectsEqual };
-export default { areValuesEqual, areArraysEqual, areObjectsEqual };
+export { areValuesEqual, areObjectsEqual };
+export default { areValuesEqual, areObjectsEqual };

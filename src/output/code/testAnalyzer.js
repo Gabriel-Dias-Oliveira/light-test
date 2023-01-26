@@ -14,30 +14,13 @@ function testing(description, runBlockOfTest) {
 }
 exports.testing = testing;
 function receive(receiveValue) {
-    if (Array.isArray(receiveValue)) {
-        var expectArray_1 = expect_1["default"].expectArray(receiveValue, failedTests);
-        return {
-            result: receiveValue,
-            expect: function (expect) {
-                expectArray_1(expect);
-            }
-        };
-    }
-    if (typeof receiveValue === "object") {
-        var expectObject_1 = expect_1["default"].expectObject(receiveValue, failedTests);
-        return {
-            result: receiveValue,
-            expect: function (expect) {
-                expectObject_1(expect);
-            }
-        };
-    }
-    var expectBasic = expect_1["default"].expectBasic(receiveValue, failedTests);
+    var isObject = typeof receiveValue === "object";
+    var expect = isObject
+        ? expect_1["default"].expectObject(receiveValue, failedTests)
+        : expect_1["default"].expectBasic(receiveValue, failedTests);
     return {
         result: receiveValue,
-        expect: function (expect) {
-            expectBasic(expect);
-        }
+        expect: expect
     };
 }
 exports.receive = receive;
