@@ -24,6 +24,8 @@ function receive(receiveValue: any): TestData {
   return {
     result: receiveValue,
     expect,
+    expectTruthy: expects.expectTruthy(receiveValue, failedTests),
+    expectFalsy: expects.expectFalsy(receiveValue, failedTests),
   };
 }
 

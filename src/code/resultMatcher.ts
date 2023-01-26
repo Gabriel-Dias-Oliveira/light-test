@@ -1,4 +1,4 @@
-import { BasicInput, ObjectInput } from "../types/types";
+import { BasicInput, ObjectInput, Falsy } from "../types/types";
 
 function areValuesEqual(recieve: BasicInput, expected: BasicInput): boolean {
   const isFromCorrecType: boolean = typeof expected !== "object";
@@ -28,6 +28,16 @@ function areObjectsEqual(receive: ObjectInput, expected: ObjectInput): boolean {
   return areEqual;
 }
 
+function isFalsy(receive: any): receive is Falsy {
+  const falsyValues: Falsy[] = [0, "", false, , null, undefined];
+
+  return falsyValues.some((element) => element === receive);
+}
+
+function isTruthy(receive: any): boolean {
+  return !isFalsy(receive);
+}
+
 function matchElements(receive: any, expected: any): boolean {
   const isObject: boolean =
     typeof expected === "object" && typeof receive === "object";
@@ -37,5 +47,5 @@ function matchElements(receive: any, expected: any): boolean {
   return areValuesEqual(receive, expected);
 }
 
-export { areValuesEqual, areObjectsEqual };
-export default { areValuesEqual, areObjectsEqual };
+export { areValuesEqual, areObjectsEqual, isTruthy, isFalsy };
+export default { areValuesEqual, areObjectsEqual, isTruthy, isFalsy };

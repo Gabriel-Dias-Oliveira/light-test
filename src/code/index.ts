@@ -65,3 +65,15 @@ testing("From different types", () => {
   receive(2).expect([]);
   receive(2).expect({});
 });
+
+testing("Truthy", () => {
+  receive(true).expectTruthy();
+  receive("asdasd").expectTruthy();
+  receive(null).expectTruthy();
+});
+
+testing("Falsy", () => {
+  receive(false).expectFalsy();
+  receive("").expectFalsy();
+  receive(null).expectFalsy();
+});

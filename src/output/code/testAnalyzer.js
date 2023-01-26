@@ -20,7 +20,9 @@ function receive(receiveValue) {
         : expect_1["default"].expectBasic(receiveValue, failedTests);
     return {
         result: receiveValue,
-        expect: expect
+        expect: expect,
+        expectTruthy: expect_1["default"].expectTruthy(receiveValue, failedTests),
+        expectFalsy: expect_1["default"].expectFalsy(receiveValue, failedTests)
     };
 }
 exports.receive = receive;

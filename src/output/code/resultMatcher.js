@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.areObjectsEqual = exports.areValuesEqual = void 0;
+exports.isFalsy = exports.isTruthy = exports.areObjectsEqual = exports.areValuesEqual = void 0;
 function areValuesEqual(recieve, expected) {
     var isFromCorrecType = typeof expected !== "object";
     return isFromCorrecType && recieve === expected;
@@ -24,12 +24,19 @@ function areObjectsEqual(receive, expected) {
     return areEqual;
 }
 exports.areObjectsEqual = areObjectsEqual;
+function isFalsy(receive) {
+    var falsyValues = [0, "", false, , null, undefined];
+    return falsyValues.some(function (element) { return element === receive; });
+}
+exports.isFalsy = isFalsy;
+function isTruthy(receive) {
+    return !isFalsy(receive);
+}
+exports.isTruthy = isTruthy;
 function matchElements(receive, expected) {
-    // const isArray: boolean = Array.isArray(expected) && Array.isArray(receive);
-    // if (isArray) return areArraysEqual(expected, receive);
     var isObject = typeof expected === "object" && typeof receive === "object";
     if (isObject)
         return areObjectsEqual(expected, receive);
     return areValuesEqual(receive, expected);
 }
-exports["default"] = { areValuesEqual: areValuesEqual, areObjectsEqual: areObjectsEqual };
+exports["default"] = { areValuesEqual: areValuesEqual, areObjectsEqual: areObjectsEqual, isTruthy: isTruthy, isFalsy: isFalsy };

@@ -3,6 +3,8 @@ import { TestValues } from "../types/types";
 export interface TestData {
   result: any;
   expect: (value: TestValues) => void;
+  expectTruthy: () => void;
+  expectFalsy: () => void;
 }
 
 export interface FailedTest {

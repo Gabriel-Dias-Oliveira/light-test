@@ -54,3 +54,13 @@ var testAnalyzer_1 = require("./testAnalyzer");
     (0, testAnalyzer_1.receive)(2).expect([]);
     (0, testAnalyzer_1.receive)(2).expect({});
 });
+(0, testAnalyzer_1.testing)("Truthy", function () {
+    (0, testAnalyzer_1.receive)(true).expectTruthy();
+    (0, testAnalyzer_1.receive)("asdasd").expectTruthy();
+    (0, testAnalyzer_1.receive)(null).expectTruthy();
+});
+(0, testAnalyzer_1.testing)("Falsy", function () {
+    (0, testAnalyzer_1.receive)(false).expectFalsy();
+    (0, testAnalyzer_1.receive)("").expectFalsy();
+    (0, testAnalyzer_1.receive)(null).expectFalsy();
+});
