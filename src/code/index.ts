@@ -1,15 +1,4 @@
-import { testing, receive, createListener } from "./testAnalyzer";
-import test from "./test";
-
-const a = createListener(test, "test");
-
-test.test();
-
-a.mockImplementation(() => console.log("Mocked!"));
-
-test.test();
-
-console.log(a.status.callTimes);
+import { testing, receive } from "./testAnalyzer";
 
 testing("When using numbers", () => {
   const x = 1;

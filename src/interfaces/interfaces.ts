@@ -12,6 +12,7 @@ export interface FailedTest {
 
 export interface Listener {
   mockImplementation: Function;
+  mockReturn: Function;
   status: ListenerStatus;
 }
 

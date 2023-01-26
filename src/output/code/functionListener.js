@@ -12,14 +12,22 @@ function createListener(moduleToListen, key) {
         callTimes: 0
     };
     moduleToListen[key] = function () {
-        functionToListen();
         updateStatus(status);
+        return functionToListen();
     };
     return {
-        changeImplementation: function (mockedImplementation) {
+        mockImplementation: function (mockedImplementation) {
             moduleToListen[key] = function () {
-                mockedImplementation();
                 updateStatus(status);
+                return mockedImplementation();
+            };
+        },
+        mockReturn: function (valueToReturn) {
+            var listenedFunction = moduleToListen[key];
+            moduleToListen[key] = function () {
+                listenedFunction();
+                updateStatus(status);
+                return valueToReturn;
             };
         },
         status: status

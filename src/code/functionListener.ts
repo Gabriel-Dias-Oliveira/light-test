@@ -17,15 +17,27 @@ function createListener(moduleToListen: ObjectInput, key: string): Listener {
   };
 
   moduleToListen[key] = () => {
-    functionToListen();
     updateStatus(status);
+
+    return functionToListen();
   };
 
   return {
     mockImplementation: (mockedImplementation: Function) => {
       moduleToListen[key] = () => {
-        mockedImplementation();
         updateStatus(status);
+
+        return mockedImplementation();
+      };
+    },
+    mockReturn: (valueToReturn: any) => {
+      const listenedFunction: Function = moduleToListen[key] as Function;
+
+      moduleToListen[key] = () => {
+        listenedFunction();
+        updateStatus(status);
+
+        return valueToReturn;
       };
     },
     status,

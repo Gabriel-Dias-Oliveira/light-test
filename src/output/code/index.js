@@ -4,9 +4,11 @@ var testAnalyzer_1 = require("./testAnalyzer");
 var test_1 = require("./test");
 var a = (0, testAnalyzer_1.createListener)(test_1["default"], "test");
 test_1["default"].test();
-a.changeImplementation(function () { return console.log("Mocked!"); });
+a.mockImplementation(function () { return console.log("Mocked!"); });
+a.mockReturn("aaa");
 test_1["default"].test();
 console.log(a.status.callTimes);
+console.log(test_1["default"].test());
 (0, testAnalyzer_1.testing)("When using numbers", function () {
     var x = 1;
     (0, testAnalyzer_1.receive)(x).expect(1);
