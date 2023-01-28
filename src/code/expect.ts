@@ -1,6 +1,6 @@
 import matchers from "./resultMatcher.js";
 import { BasicInput, ExpectAnalyzer, ObjectInput } from "../types/types.js";
-import { FailedTest } from "../interfaces/interfaces.js";
+import { FailedTest, Listener } from "../interfaces/interfaces.js";
 
 function expectBasic(
   receive: BasicInput,
@@ -74,6 +74,43 @@ function expectError(
   };
 }
 
+function expectToHaveBeenCalled(
+  listener: Listener,
+  failedTests: FailedTest[]
+): ExpectAnalyzer {
+  return () => {
+    const passed: boolean = listener?.status?.called;
+
+    if (passed) return;
+
+    const failedTest: FailedTest = getFailedTestPayload(
+      "Expected to be called",
+      "Function was not called"
+    );
+
+    failedTests.push(failedTest);
+  };
+}
+
+function expectCalledTimes(
+  listener: Listener,
+  failedTests: FailedTest[]
+): ExpectAnalyzer {
+  return (expect: number) => {
+    const receive: number = listener?.status?.callTimes;
+    const passed: boolean = matchers.areValuesEqual(receive, expect);
+
+    if (passed) return;
+
+    const failedTest: FailedTest = getFailedTestPayload(
+      `Expected to be called ${expect} times`,
+      `Function was called ${receive} times`
+    );
+
+    failedTests.push(failedTest);
+  };
+}
+
 function getFailedTestPayload(expect: any, receive: any): FailedTest {
   return {
     expect: JSON.stringify(expect),
@@ -81,11 +118,21 @@ function getFailedTestPayload(expect: any, receive: any): FailedTest {
   };
 }
 
-export { expectBasic, expectObject, expectTruthy, expectFalsy, expectError };
+export {
+  expectBasic,
+  expectObject,
+  expectTruthy,
+  expectFalsy,
+  expectError,
+  expectToHaveBeenCalled,
+  expectCalledTimes,
+};
 export default {
   expectBasic,
   expectObject,
   expectTruthy,
   expectFalsy,
   expectError,
+  expectToHaveBeenCalled,
+  expectCalledTimes,
 };

@@ -4,7 +4,7 @@ import { readdirSync } from "fs";
 import { exec } from "child_process";
 
 const PARAMS_OF_EXEC = process.execArgv.length + 2;
-const FLAG = "--path";
+const FLAG = "--folder";
 
 let filestToRun = [];
 
@@ -21,11 +21,14 @@ async function main() {
 
 function executeScript(file, dir) {
   const errorPrefix = "Failed to execute the tests:";
+  let directory = "";
 
-  exec(`node ${dir ? dir : ""}${file}`, (error, result, stderr) => {
-    if (error) return console.log(`${errorPrefix} ${error.message}`);
+  if (dir) directory = dir?.endsWith("/") ? dir : `${dir}/`;
 
-    if (stderr) return console.log(`${errorPrefix} ${stderr}`);
+  exec(`node ${dir ? directory : ""}${file}`, (error, result, stderr) => {
+    if (error) return console.error(`${errorPrefix} ${error.message}`);
+
+    if (stderr) return console.error(`${errorPrefix} ${stderr}`);
 
     console.log(result);
   });

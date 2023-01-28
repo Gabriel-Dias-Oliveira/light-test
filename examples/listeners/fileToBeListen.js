@@ -1,8 +1,8 @@
-function consoleMessage(): void {
+function consoleMessage() {
   console.log("Hello!");
 }
 
-function withReturn(): boolean {
+function withReturn() {
   return true;
 }
 

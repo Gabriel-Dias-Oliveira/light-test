@@ -6,6 +6,8 @@ export interface TestData {
   expectTruthy: () => void;
   expectFalsy: () => void;
   expectError: () => void;
+  expectToHaveBeenCalled: () => void;
+  expectCalledTimes: (value: number) => void;
 }
 
 export interface FailedTest {
@@ -20,6 +22,6 @@ export interface Listener {
 }
 
 export interface ListenerStatus {
-  called: Boolean;
+  called: boolean;
   callTimes: number;
 }

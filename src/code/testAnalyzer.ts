@@ -25,6 +25,11 @@ function receive(receiveValue: any): TestData {
     expectTruthy: expects.expectTruthy(receiveValue, failedTests),
     expectFalsy: expects.expectFalsy(receiveValue, failedTests),
     expectError: expects.expectError(receiveValue, failedTests),
+    expectToHaveBeenCalled: expects.expectToHaveBeenCalled(
+      receiveValue,
+      failedTests
+    ),
+    expectCalledTimes: expects.expectCalledTimes(receiveValue, failedTests),
   };
 }
 
