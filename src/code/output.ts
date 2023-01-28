@@ -1,4 +1,4 @@
-import { FailedTest } from "../interfaces/interfaces";
+import { FailedTest } from "../interfaces/interfaces.js";
 
 function printResult(test: string, failedTests: FailedTest[]): void {
   const hasTestWorked: boolean = failedTests.length === 0;

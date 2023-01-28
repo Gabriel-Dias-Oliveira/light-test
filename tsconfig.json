@@ -1,17 +1,18 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
+    "module": "ESNext",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "target": "ES6",
+    "target": "ESNext",
     "sourceMap": true,
     "rootDir": "src",
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "moduleResolution": "nodenext"
   }
 }

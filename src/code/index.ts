@@ -1,4 +1,4 @@
-import { testing, receive } from "./testAnalyzer";
+import { testing, receive } from "./testAnalyzer.js";
 
 testing("When using numbers", () => {
   const x = 1;

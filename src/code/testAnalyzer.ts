@@ -1,8 +1,8 @@
-import expects from "./expect";
-import output from "./output";
-import listener from "./functionListener";
-import { TestData, FailedTest, Listener } from "../interfaces/interfaces";
-import { ExpectAnalyzer, ObjectInput } from "../types/types";
+import expects from "./expect.js";
+import { printResult } from "./output.js";
+import listener from "./functionListener.js";
+import { TestData, FailedTest, Listener } from "../interfaces/interfaces.js";
+import { ExpectAnalyzer, ObjectInput } from "../types/types.js";
 
 let failedTests: FailedTest[];
 
@@ -10,7 +10,7 @@ function testing(description: string, runBlockOfTest: () => void): void {
   failedTests = [];
 
   runBlockOfTest();
-  output.printResult(description, failedTests);
+  printResult(description, failedTests);
 }
 
 function receive(receiveValue: any): TestData {
@@ -33,4 +33,4 @@ function createListener(moduleToListen: ObjectInput, key: string): Listener {
 }
 
 export { testing, receive, createListener };
-export default { testing, receive };
+export default { testing, receive, createListener };

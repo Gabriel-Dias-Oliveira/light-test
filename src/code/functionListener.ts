@@ -1,5 +1,5 @@
-import { Listener, ListenerStatus } from "../interfaces/interfaces";
-import { ObjectInput } from "../types/types";
+import { Listener, ListenerStatus } from "../interfaces/interfaces.js";
+import { ObjectInput } from "../types/types.js";
 
 function createListener(moduleToListen: ObjectInput, key: string): Listener {
   if (!moduleToListen[key])

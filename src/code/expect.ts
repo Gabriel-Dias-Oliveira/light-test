@@ -1,6 +1,6 @@
-import matchers from "./resultMatcher";
-import { BasicInput, ExpectAnalyzer, ObjectInput } from "../types/types";
-import { FailedTest } from "../interfaces/interfaces";
+import matchers from "./resultMatcher.js";
+import { BasicInput, ExpectAnalyzer, ObjectInput } from "../types/types.js";
+import { FailedTest } from "../interfaces/interfaces.js";
 
 function expectBasic(
   receive: BasicInput,

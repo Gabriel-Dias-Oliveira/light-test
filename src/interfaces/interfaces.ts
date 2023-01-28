@@ -1,4 +1,4 @@
-import { TestValues } from "../types/types";
+import { TestValues } from "../types/types.js";
 
 export interface TestData {
   result: any;

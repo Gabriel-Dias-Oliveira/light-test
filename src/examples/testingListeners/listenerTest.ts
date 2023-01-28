@@ -1,5 +1,5 @@
-import { createListener } from "../../code/testAnalyzer";
-import filedToBeListen from "./fileToBeListen";
+import { createListener } from "../../code/testAnalyzer.js";
+import filedToBeListen from "./fileToBeListen.js";
 
 const listenToLog = createListener(filedToBeListen, "consoleMessage");
 

@@ -1,4 +1,4 @@
-import { BasicInput, ObjectInput, Falsy } from "../types/types";
+import { BasicInput, ObjectInput, Falsy } from "../types/types.js";
 
 function areValuesEqual(recieve: BasicInput, expected: BasicInput): boolean {
   const isFromCorrecType: boolean = typeof expected !== "object";

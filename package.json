@@ -2,15 +2,16 @@
   "name": "lighttest",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
-  "type": "commonjs",
+  "main": "",
+  "type": "module",
+  "module": "esnext",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint . --ext .ts",
-    "code": "clear && tsc src/code/*.ts --outDir ./src/output && node src/output/code/index.js",
-    "compileExamples": "clear && tsc src/examples/**/*.ts --outDir ./src/output",
-    "runListenerExample": "npm run compileExamples && node src/output/examples/testingListeners/listenerTest.js"
+    "lint": "eslint . --ext .ts"
   },
+  "bin": {
+    "testing": "./bin/lightTestCommand.js"
+  },
+  "preferGlobal": true,
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -28,7 +29,8 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.1.1",
     "prettier": "^2.8.3",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.4",
+    "webpack-cli": "^5.0.1"
   },
   "dependencies": {
     "@types/node": "^18.11.18",
