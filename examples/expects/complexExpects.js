@@ -1,10 +1,15 @@
-import { testing, receive } from "../../dist/code/testAnalyzer.js"; // Import relative to your package
+import { testing, receive, when } from "../../dist/code/testAnalyzer.js"; // Import relative to your package
 
 testing("When using n-D arrays", () => {
   const evenNumbers = [2, [4], 6, [8, [10], 12]];
 
-  receive(evenNumbers).expect([2, [4], 6, [8, [10], 12]]);
-  receive(evenNumbers).expect([2, [4], 6, [8, 10, 12]]); // Should display an error message!
+  when("Arrays are equal should work", () => {
+    receive(evenNumbers).expect([2, [4], 6, [8, [10], 12]]);
+  });
+
+  when("Arrays are different should fail", () => {
+    receive(evenNumbers).expect([2, [4], 6, [8, 10, 12]]); // Should display an error message!
+  });
 });
 
 testing("When using n-D objects", () => {
@@ -24,8 +29,13 @@ testing("When using n-D objects", () => {
     address: { street: "Numbers", nationality: "Egyptian" },
   };
 
-  receive(person).expect(expectResult);
-  receive(person).expect(wrongResult); // Should display an error message!
+  when("Objects are equal should work", () => {
+    receive(person).expect(expectResult);
+  });
+
+  when("Objects are different should fail", () => {
+    receive(person).expect(wrongResult); // Should display an error message!
+  });
 });
 
 /* 

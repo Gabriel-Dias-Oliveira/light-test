@@ -1,4 +1,4 @@
-import { testing, receive } from "../../dist/code/testAnalyzer.js"; // Import relative to your package
+import { testing, receive, when } from "../../dist/code/testAnalyzer.js"; // Import relative to your package
 
 testing("When using basic types", () => {
   const myInt = 1;
@@ -15,18 +15,28 @@ testing("When using arrays", () => {
   const evenNumbers = [2, 4, 6, 8];
   const oddNumbers = [1, 3, 5, 7];
 
-  receive(evenNumbers).expect(evenNumbers);
-  receive(oddNumbers).expect(oddNumbers);
-  receive(evenNumbers).expect(oddNumbers); // Should display an error message!
+  when("Arrays are equal should work", () => {
+    receive(evenNumbers).expect(evenNumbers);
+    receive(oddNumbers).expect(oddNumbers);
+  });
+
+  when("Arrays are different should fail", () => {
+    receive(evenNumbers).expect(oddNumbers); // Should display an error message!
+  });
 });
 
 testing("When using objects", () => {
   const evenObject = { even: 2 };
   const oddObject = { odd: 1 };
 
-  receive(evenObject).expect(evenObject);
-  receive(evenObject).expect({ e: 2 }); // Should display an error message!
-  receive(oddObject).expect({ o: 1 }); // Should display an error message!
+  when("Objects are equal should work", () => {
+    receive(evenObject).expect(evenObject);
+  });
+
+  when("Objects are different should fail", () => {
+    receive(evenObject).expect({ e: 2 }); // Should display an error message!
+    receive(oddObject).expect({ o: 1 }); // Should display an error message!
+  });
 });
 
 testing("When using Truthy values", () => {
