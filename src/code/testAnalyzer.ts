@@ -5,12 +5,14 @@ import { TestData, FailedTest, Listener } from "../interfaces/interfaces.js";
 import { ExpectAnalyzer, ObjectInput } from "../types/types.js";
 
 let failedTests: FailedTest[];
+let testDescription = "";
 
 function testing(description: string, runBlockOfTest: () => void): void {
   failedTests = [];
+  testDescription = description;
 
   runBlockOfTest();
-  printResult(description, failedTests);
+  printResult(testDescription, failedTests);
 }
 
 function receive(receiveValue: any): TestData {

@@ -6,7 +6,8 @@
   "type": "module",
   "module": "esnext",
   "scripts": {
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "testing": "testing --folder ./src/tests"
   },
   "bin": {
     "testing": "./bin/lightTestCommand.js"
