@@ -26,7 +26,8 @@ function printTestCase(test: string, failedTests: FailedTest[]): void {
   const hasTestWorked: boolean = failedTests.length === 0;
 
   if (hasTestWorked) {
-    console.log(`\x1b[32m\nCase "${test}" worked successfully\n====\x1b[0m`);
+    const message: string = `\x1b[32m\nCase when "${test}" worked successfully\n====\x1b[0m`;
+    console.log(message);
 
     return;
   }

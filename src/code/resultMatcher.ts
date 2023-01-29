@@ -39,11 +39,11 @@ function isTruthy(receive: any): boolean {
 }
 
 function throwError(receive: Function): boolean {
-  if (typeof receive !== "function") return false;
-
   let hasError: boolean = false;
 
   try {
+    if (typeof receive !== "function") return false;
+
     receive();
   } catch {
     hasError = true;
