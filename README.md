@@ -14,7 +14,7 @@ Light test provides some functions to write tests and mocks in a simple and easy
 
 After installing it, using
 
-> npm install -g light-test
+> npm install -g @gabriel-dias/light-test
 
 you are almost ready to go!
 You already can start writing your tests, but why not write down some scripts to run our tests?
