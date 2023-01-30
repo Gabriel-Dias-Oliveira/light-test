@@ -2,7 +2,7 @@
 
 ## _A light and simple test tool_
 
-Light test provide some functions to write tests and mocks in a simple and easy way.
+Light test provides some functions to write tests and mocks in a simple and easy way.
 
 ## Features
 
