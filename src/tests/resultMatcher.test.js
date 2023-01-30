@@ -1,4 +1,4 @@
-import { testing, receive, when } from "../../dist/code/testAnalyzer.js";
+import { testing, receive, when } from "../../dist/code/lightTest.js";
 import matchers from "../../dist/code/resultMatcher.js";
 
 testing("Function areValuesEqual", () => {

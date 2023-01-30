@@ -1,5 +1,5 @@
 {
-  "name": "lighttest",
+  "name": "light-test",
   "version": "1.0.0",
   "description": "",
   "main": "",
@@ -34,7 +34,6 @@
   },
   "dependencies": {
     "@types/node": "^18.11.18",
-    "chalk": "^5.2.0",
     "ts-node": "^10.9.1"
   }
 }

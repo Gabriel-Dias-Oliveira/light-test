@@ -1,8 +1,4 @@
-import {
-  testing,
-  receive,
-  createListener,
-} from "../../dist/code/testAnalyzer.js"; // Import relative to your package
+import { testing, receive, createListener } from "../../dist/code/lightTest.js"; // Import relative to your package
 import fileToBeListen from "../listeners/fileToBeListen.js";
 
 const listenToLog = createListener(fileToBeListen, "consoleMessage");

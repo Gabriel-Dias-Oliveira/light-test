@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
     "module": "NodeNext",
-    "declaration": true,
+    "declaration": false,
     "removeComments": true,
-    "emitDecoratorMetadata": true,
+    "emitDecoratorMetadata": false,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "rootDir": "src",
     "outDir": "./dist",
     "baseUrl": "./",

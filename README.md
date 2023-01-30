@@ -14,7 +14,7 @@ Light test provide some functions to write tests and mocks in a simple and easy 
 
 After installing it, using
 
-> NPM COMMAND HERE
+> npm install -g light-test
 
 you are almost ready to go!
 You already can start writing your tests, but why not write down some scripts to run our tests?
@@ -79,10 +79,10 @@ Let's say you have a file to be tested:
 **_myFile.js_**
 
 ```js
-functions checkUserAge(age) {
-    if (age < 18) return "You must have 18 years old";
+function checkUserAge(age) {
+  if (age < 18) return "You must have 18 years old";
 
-    return "Hello!"
+  return "Hello!";
 }
 ```
 
@@ -91,16 +91,16 @@ You can create a file:
 **_myTest.test.js_** or even **_myTest.js_**
 
 ```js
-import { testing, receive } from ...testAnalyzer.js"; // Import relative to your package
+import { testing, receive } from "light-test/lightTest.js";
 import { checkUserAge } from "myFile.js";
 
 testing("Function checkUserAge", () => {
-    const success = 'Hello!';
-    const failed = "You must have 18 years old";
+  const success = "Hello!";
+  const failed = "You must have 18 years old";
 
-    receive(checkUserAge(18)).expect(success);
-    receive(checkUserAge(17)).expect(failed);
-})
+  receive(checkUserAge(18)).expect(success);
+  receive(checkUserAge(17)).expect(failed);
+});
 ```
 
 You can find some usage examples in the **_examples folder_**, check it to see more complex cases and other functions.

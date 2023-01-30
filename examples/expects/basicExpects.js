@@ -1,4 +1,4 @@
-import { testing, receive, when } from "../../dist/code/testAnalyzer.js"; // Import relative to your package
+import { testing, receive, when } from "../../dist/code/lightTest.js"; // Import relative to your package
 
 testing("When using basic types", () => {
   const myInt = 1;

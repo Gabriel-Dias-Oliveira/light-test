@@ -1,4 +1,4 @@
-import { testing, receive, when } from "../../dist/code/testAnalyzer.js"; // Import relative to your package
+import { testing, receive, when } from "../../dist/code/lightTest.js"; // Import relative to your package
 
 testing("When using n-D arrays", () => {
   const evenNumbers = [2, [4], 6, [8, [10], 12]];
